@@ -1,0 +1,28 @@
+import { createConnection } from "typeorm";
+import dotenv from "dotenv";
+
+// Load environment variables
+dotenv.config();
+
+const main = async () => {
+  try {
+    const connection = await createConnection({
+      type: process.env.DB_TYPE as "postgres",
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT || "5432"),
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
+      // entities: [User],
+      synchronize: process.env.DB_SYNCHRONIZE === "true",
+    });
+
+    console.log("Connected to the database");
+  } catch (error) {
+    console.error("Error connecting to the database:", error);
+    process.exit(1);
+    
+  }
+};
+
+main();
