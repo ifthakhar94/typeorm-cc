@@ -2,6 +2,7 @@ import { createConnection } from "typeorm";
 import dotenv from "dotenv";
 import { Client } from "./entities/Client";
 import { Banker } from "./entities/Banker";
+import { Transaction } from "./entities/Transaction";
 
 // Load environment variables
 dotenv.config();
@@ -15,7 +16,7 @@ const main = async () => {
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [Client, Banker],
+      entities: [Client, Banker, Transaction],
       synchronize: process.env.DB_SYNCHRONIZE === "true",
     });
 
